@@ -1,0 +1,32 @@
+<p>Soy Papá</p>
+<!-- {{texto}}
+<button (click) ="miMetodo(texto)" [disabled]="estaDeshabilitado">texto del boton</button>
+
+<button [disabled]="devolverTrue()">ttt</button> -->
+<button appDirectivaAttr (click)="cambiarValor()">cambiar valor</button>
+
+<p>{{nroTarjeta}}</p>
+
+<br>
+<!-- <span>{{ 2 | elevar:10 | currency: 'USD':true: '1.2-2'}}</span> -->
+<!-- <span>{{ 1| currency: 'USD' :true: '1.2-2'}}</span> -->
+<!-- {{this.listadoS.getDispositivos() | json}} -->
+
+<div *ngIf= "estaDeshabilitado">
+  esto es un div
+</div>
+
+<div *ngIf= "!estaDeshabilitado">
+  esto es el else
+</div>
+<input [(ngModel)]='nroTarjeta'>
+
+<div *ngFor="let dispositivo of this.miArray">
+  {{dispositivo |json}}
+  <p>Nombre: {{dispositivo.nombre}}</p>
+  <h2 appDirectivaAttr>Ubicacion: {{dispositivo.ubicacion}}</h2>
+
+</div>
+<br>
+
+
