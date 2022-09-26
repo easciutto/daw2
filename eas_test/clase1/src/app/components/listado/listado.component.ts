@@ -12,15 +12,19 @@ export class ListadoComponent implements OnInit {
   texto:string= "soy un texto";
   nroTarjeta:string="";
   estaDeshabilitado:boolean=false;
-  miArray:any;
+  miArray;
 
-  constructor(public listadoS:ListadoService) { }
-
-  ngOnInit(): void {
+  constructor(public listadoS:ListadoService) {
     // console.log(this.listadoS.getDispositivos());
     this.miArray=this.listadoS.getDispositivos();
 
+   }
+
+
+  ngOnInit(): void {
+
   }
+
   miMetodo(parametro1:string){
     console.log("clik en el boton", parametro1);
     console.log(this.nroTarjeta);
@@ -33,4 +37,7 @@ export class ListadoComponent implements OnInit {
     return true;
   }
 
+  manejadorHijo(valor:any){
+    console.log(valor);
+  }
 }

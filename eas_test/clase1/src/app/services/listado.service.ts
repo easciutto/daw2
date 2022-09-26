@@ -13,7 +13,7 @@ export class ListadoService {
     {
       dispositivoId:1,
       nombre:"Dispositivo1",
-      ubicacion:"cocina",
+      ubicacion:"cocinat",
       electrovalvulaId:1
     },
     {
@@ -51,7 +51,7 @@ export class ListadoService {
 
   getDispositivos(){
   //getDispositivos(id:string){ //para el caso del get
-    //return this.listadoDispositivos;
+   // return this.listadoDispositivos;
     return this.listado;
     //return this._http.get("http://localhost:3000/dispositivos"+id);
     //return this._http.post("http://localhost:3000/dispositivos", {body:""});

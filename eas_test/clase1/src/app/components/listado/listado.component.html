@@ -1,4 +1,4 @@
-<p>Soy Papá</p>
+<!-- <p>Soy Papá</p> -->
 <!-- {{texto}}
 <button (click) ="miMetodo(texto)" [disabled]="estaDeshabilitado">texto del boton</button>
 
@@ -7,7 +7,7 @@
 
 <p>{{nroTarjeta}}</p>
 
-<br>
+<!-- <br> -->
 <!-- <span>{{ 2 | elevar:10 | currency: 'USD':true: '1.2-2'}}</span> -->
 <!-- <span>{{ 1| currency: 'USD' :true: '1.2-2'}}</span> -->
 <!-- {{this.listadoS.getDispositivos() | json}} -->
@@ -21,12 +21,11 @@
 </div>
 <input [(ngModel)]='nroTarjeta'>
 
-<div *ngFor="let dispositivo of this.miArray">
-  {{dispositivo |json}}
-  <p>Nombre: {{dispositivo.nombre}}</p>
-  <h2 appDirectivaAttr>Ubicacion: {{dispositivo.ubicacion}}</h2>
-
+<div *ngFor="let elemento of miArray">
+  <!-- {{elemento |json}} -->
+  <!-- <p>Nombre: {{elemento.nombre}}</p>
+  <h2 appDirectivaAttr>Ubicacion: {{elemento.ubicacion}}</h2> -->
+  <dispositivo [dispositivo]= "elemento" (onChange)="manejadorHijo($event)"></dispositivo>
 </div>
-<br>
 
 

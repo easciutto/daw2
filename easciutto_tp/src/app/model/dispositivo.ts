@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable no-underscore-dangle */
 export class Dispositivo{
   private _dispositivoId: number;
   private _nombre: string;
   private _ubicacion: string;
   private _electrovalvulaId: number;
 
-  constructor(dispoId:number,nombre:string,ubicacion:string,electrovalvulaId:number){
+  constructor(dispoId: number,nombre: string,ubicacion: string,electrovalvulaId: number){
       this._dispositivoId=dispoId;
       this._nombre=nombre;
       this._ubicacion=ubicacion;

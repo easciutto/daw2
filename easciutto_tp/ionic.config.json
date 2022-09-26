@@ -1,0 +1,7 @@
+{
+  "name": "easciutto_tp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
