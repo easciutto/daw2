@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { NombrePipePipe } from 'src/app/pipes/nombre-pipe.pipe';
-import { NombreDirectivaDirective } from 'src/app/directives/nombre-directiva.directive';
-import { DispositivoPageModule } from '../dispositivo/dispositivo.module';
+// import { NombrePipePipe } from 'src/app/pipes/nombre-pipe.pipe';
+// import { NombreDirectivaDirective } from 'src/app/directives/nombre-directiva.directive';
+// import { DispositivoPageModule } from '../dispositivo/dispositivo.module';
 
 
 @NgModule({
@@ -16,8 +16,9 @@ import { DispositivoPageModule } from '../dispositivo/dispositivo.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    DispositivoPageModule
+    // DispositivoPageModule
   ],
-  declarations: [HomePage, NombrePipePipe, NombreDirectivaDirective]
+  // declarations: [HomePage, NombrePipePipe, NombreDirectivaDirective]
+  declarations: [HomePage]
 })
 export class HomePageModule {}

@@ -11,10 +11,10 @@ export class ListadoService {
 
 
   constructor(/*private _http:HttpClient*/) {  //para que llame a un servicio de http
-    const disp: Dispositivo= new Dispositivo(1,'Sensor 1','Patio frente',1);
-    const disp2: Dispositivo= new Dispositivo(2,'Sensor 2','Cocina',2);
-    const disp3: Dispositivo= new Dispositivo(3,'Sensor 3','Jardin Delantero',3);
-    const disp4: Dispositivo= new Dispositivo(4,'Sensor 4','Living',4);
+    const disp: Dispositivo= new Dispositivo(1,'Electroválvula 1','Patio frente',1);
+    const disp2: Dispositivo= new Dispositivo(2,'Sensor temperatura','Cocina',2);
+    const disp3: Dispositivo= new Dispositivo(3,'Electroválvula 2','Jardin Delantero',3);
+    const disp4: Dispositivo= new Dispositivo(4,'Sensor temperatura','Living',4);
     this.listado.push(disp);
     this.listado.push(disp2);
     this.listado.push(disp3);
@@ -22,8 +22,6 @@ export class ListadoService {
   }
 
   getDispositivos(){
-  //getDispositivos(id:string){ //para el caso del get
-    //return this.listadoDispositivos;
     return this.listado;
     //return this._http.get("http://localhost:3000/dispositivos"+id);
     //return this._http.post("http://localhost:3000/dispositivos", {body:""});

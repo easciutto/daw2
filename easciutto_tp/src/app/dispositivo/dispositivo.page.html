@@ -1,9 +1,25 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>dispositivo-eas</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>dispositivo</ion-title>
+      <ion-buttons slot="start">
+          <ion-button routerLink="/">
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      <ion-title>Dispositivo - {{dispositivo.dispositivoId}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
+  <div id="highcharts" style="width:100%; height:300px;"></div>
+  <div>
+      {{dispositivo.ubicacion}}
+  </div>
 
 </ion-content>

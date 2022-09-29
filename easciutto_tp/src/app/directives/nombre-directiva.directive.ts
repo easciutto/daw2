@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
@@ -5,10 +6,10 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class NombreDirectivaDirective {
 
-  constructor(private el:ElementRef) {
+  constructor(private el: ElementRef) {
     //el.nativeElement.style.backgroundColor="orange";
    }
-    private cambiar(color:string){
+    private cambiar(color: string){
       this.el.nativeElement.style.backgroundColor=color;
     }
     @HostListener('mouseenter') onMouseEnter() {

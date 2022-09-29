@@ -10,7 +10,7 @@ espero obtener 1024
 })
 export class NombrePipePipe implements PipeTransform {
 
-  transform(value:number, exponente:number):number {
+  transform(value: number, exponente: number): number {
     return Math.pow(value, exponente);
   }
   /* ejemplo para aplicar en el TP
