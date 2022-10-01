@@ -19,10 +19,30 @@ export class HomePage /*implements OnInit*/{
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit(): void {
-    console.log(this.listadoS.getDispositivos());
-    this.arrayDispositivos=this.listadoS.getDispositivos();
-     }
+    //console.log(this.listadoS.getDispositivos());
+    //this.arrayDispositivos=this.listadoS.getDispositivos();
+    //metodo 1 para aplicar Promises
+    // this.listadoS.getDispositivos()
+    // .then((valorExito)=>{
+    //   console.log(valorExito);
+    //   this.arrayDispositivos=valorExito;
+    // })
+    // .catch((err)=>{
+    //   console.log('Error al buscar dispositivos');
+    // });
+    this.metodoAsyncAwait();
+  }
 
+  async metodoAsyncAwait(){
+    try{
+      const valorExito: any = await this.listadoS.getDispositivos();
+      console.log(valorExito);
+      this.arrayDispositivos=valorExito;
+    }
+    catch (error){
+      console.log('Error al buscar dispositivos');
+    };
+  }
   // miMetodo(parametro1: string){
   //   console.log('clik en el boton', parametro1);
   //   console.log(this.nroTarjeta);
