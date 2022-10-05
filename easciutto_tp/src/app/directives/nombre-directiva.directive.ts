@@ -7,17 +7,19 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 export class NombreDirectivaDirective {
 
   constructor(private el: ElementRef) {
-    //el.nativeElement.style.backgroundColor="orange";
-   }
-    private cambiar(color: string){
-      this.el.nativeElement.style.backgroundColor=color;
-    }
-    @HostListener('mouseenter') onMouseEnter() {
-      this.cambiar('blue');
-    }
+    el.nativeElement.style.backgroundColor='LightBlue';
+    //el.nativeElement.style.color ='orange';
 
-    @HostListener('mouseleave') onMouseLeave() {
-      this.cambiar('');
-    }
+  }
+  private cambiar(color: string){
+    this.el.nativeElement.style.backgroundColor=color;
+  }
+  @HostListener('mouseenter') onMouseEnter() {
+    this.cambiar('RoyalBlue');
+  }
+
+  @HostListener('mouseleave') onMouseLeave() {
+    this.cambiar('LightBlue');
+  }
 
 }

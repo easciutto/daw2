@@ -62,31 +62,5 @@ routerDispositivo.delete("/:id", function(req,res) {
 
 });
 
-//Modifico un dispositivo del cual se recibe su id como parámetro
-routerDispositivo.post('/:idDispositivo', function(req, res) {
-    // pool.query('Select * from Dispositivos where dispositivoId=?', [req.params.idDispositivo], function(err, result, fields) {
-    //     if (err) {
-    //         res.send(err).status(400);
-    //         return;
-    //     }
-    //     res.send(result[0]);
-    //});
-});
-
-// routerDispositivo.post("/", jwtValidator, function(req, res) {
-//     let insertElectroSQL = "INSERT INTO Electrovalvulas (nombre) VALUES (?)";
-//     pool.query(insertElectroSQL, [req.body.electrovalvula],(error, result, fields) => {
-//         if(error) return res.status(500).send("Error:"+ error);
-//         let electroId = result.insertId;
-//         let insertSQL = "INSERT INTO Dispositivos (nombre,ubicacion,electrovalvulaId, usuarioId) VALUES (?,?,?,?)";
-//         pool.query(insertSQL, [req.body.nombre, req.body.ubicacion,electroId,req.user.usuarioId],(errorInsertDisp, resultInsertDisp, fields) => {
-//             if(errorInsertDisp) return res.status(500).send("Error:"+ errorInsertDisp);
-//                 return res.status(201).send({
-//                     electrovalvulaId:electroId,
-//                     dispositivoId:resultInsertDisp.insertId
-//             });;
-//         });
-//     });
-// });
 
 module.exports = routerDispositivo;

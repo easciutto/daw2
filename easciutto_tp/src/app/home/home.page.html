@@ -1,37 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>TP DAM EAS-4</ion-title>
+    <ion-title>Listado de dispositivos</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<!-- <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blankooo</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div *ngFor="let elemento of miArray">
-    {{elemento |json}}
-   <p>Nombre: {{elemento.nombre}}</p>
-  <h2 appDirectivaAttr>Ubicacion: {{elemento.ubicacion}}</h2>
-  <app-dispositivo [dispositivo]= "elemento" (onChange)="manejadorHijo($event)"></app-dispositivo> -->
-  <!-- </div>
-</ion-content> -->
-
-<!-- <ion-content [fullscreen]="true">
-
-  <div id="container">
-    <strong>Hola <br>
-      {{texto}} <br>
-      {{texto}}
-
-
-    </strong>
-
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content> -->
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -45,9 +16,9 @@
               <ion-icon size="large" name="thermometer"></ion-icon>
           </ion-avatar>
           <ion-label>
-              <h2>Sensor {{dispositivo.dispositivoId}} - {{dispositivo.nombre}}</h2>
+              <h2 appDirectivaAttr>Disp {{dispositivo.dispositivoId}} - Sensor de humedad</h2>
               <h3>
-                  <ion-icon name="pin"></ion-icon> {{dispositivo.ubicacion}} - ID {{dispositivo.electrovalvulaId}}</h3>
+                  <ion-icon name="pin"></ion-icon> {{dispositivo.ubicacion}} - EV {{dispositivo.electrovalvulaId}}</h3>
           </ion-label>
       </ion-item>
   </ion-list>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { ListadoService } from '../services/listado.service';
 import { Dispositivo } from '../model/dispositivo';
 
@@ -7,29 +7,14 @@ import { Dispositivo } from '../model/dispositivo';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage /*implements OnInit*/{
+export class HomePage {
 
-  texto= 'soy un texto';
   arrayDispositivos: Dispositivo[];
 
   constructor(public listadoS: ListadoService) {}
-    //console.log(this.listadoS.getDispositivos());
-    //this.arrayDispositivos=this.listadoS.getDispositivos();
-    //constructor(){}
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
-  ngOnInit(): void {
-    //console.log(this.listadoS.getDispositivos());
-    //this.arrayDispositivos=this.listadoS.getDispositivos();
-    //metodo 1 para aplicar Promises
-    // this.listadoS.getDispositivos()
-    // .then((valorExito)=>{
-    //   console.log(valorExito);
-    //   this.arrayDispositivos=valorExito;
-    // })
-    // .catch((err)=>{
-    //   console.log('Error al buscar dispositivos');
-    // });
+  ionViewDidEnter(): void {
     this.metodoAsyncAwait();
   }
 

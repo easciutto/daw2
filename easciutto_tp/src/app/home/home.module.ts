@@ -6,7 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 // import { NombrePipePipe } from 'src/app/pipes/nombre-pipe.pipe';
-// import { NombreDirectivaDirective } from 'src/app/directives/nombre-directiva.directive';
+import { NombreDirectivaDirective } from 'src/app/directives/nombre-directiva.directive';
 // import { DispositivoPageModule } from '../dispositivo/dispositivo.module';
 
 
@@ -19,6 +19,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     // DispositivoPageModule
   ],
   // declarations: [HomePage, NombrePipePipe, NombreDirectivaDirective]
-  declarations: [HomePage]
+  declarations: [HomePage, NombreDirectivaDirective]
 })
 export class HomePageModule {}

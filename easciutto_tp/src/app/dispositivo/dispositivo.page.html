@@ -1,11 +1,5 @@
 <!-- <ion-header>
   <ion-toolbar>
-    <ion-title>dispositivo-eas</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
-<ion-header>
-  <ion-toolbar>
       <ion-buttons slot="start">
           <ion-button routerLink="/">
               <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
@@ -20,6 +14,35 @@
   <div id="highcharts" style="width:100%; height:300px;"></div>
   <div>
       {{dispositivo.ubicacion}}
-  </div>
+  </div> -->
+<!--
+</ion-content> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Dispositivo - {{idDispositivo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content>
+  <div id="highcharts" [hidden]="!existenMediciones" style="width:100%; height:300px;"></div>
+  <div  [hidden]="existenMediciones">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Estado electrovalvula</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        No existen mediciones registradas, necesitan obtenerse mediciones para mostrar estado
+      </ion-card-content>
+    </ion-card></div>
+
+  <ion-button color="primary" expand="block" routerLink="/dispositivo/{{idDispositivo}}/mediciones" routerDirection="forward">Mediciones Históricas</ion-button>
+  <ion-button color="primary" expand="block" routerLink="/dispositivo/{{idElectrovalvula}}/logs" routerDirection="forward"> Logs de Riego</ion-button>
+  <ion-button color="primary" expand="block" (click)="callGenerarMedicion()">Solicitar medición</ion-button>
+  <div *ngIf="showOpenButton;then content else other_content">here is ignored</div>
+  <ng-template #content><ion-button [disabled] = "!requiereRiego" color="primary" expand="block" (click)="handleButtonOpenClick()"> Abrir Electrovalvula</ion-button>  </ng-template>
+  <ng-template #other_content><ion-button color="primary"  expand="block" (click)="handleButtonCloseClick()"> Cerrar Valvula</ion-button>  </ng-template>
 </ion-content>
