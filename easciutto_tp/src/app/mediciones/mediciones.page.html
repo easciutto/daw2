@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-buttons slot="start">
-      <ion-button routerLink="/">
+      <ion-button routerLink="/dispositivo/{{idDispositivo}}">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -12,10 +12,11 @@
 <ion-content>
   <ion-item *ngFor="let medicion of this.listadoMediciones" >
     <ion-avatar slot="start">
-      <ion-icon size="small" name="thermometer"></ion-icon>
+      <ion-icon size="small" name="speedometer-outline"></ion-icon>
     </ion-avatar>
     <ion-label>
-      <h4>{{medicion.fecha|date:"dd/MM/yy-H:mm:ss":'+0000'}}hs, V: {{medicion.valor|PresionPipe}}</h4>
+      <!-- <h4>{{medicion.fecha|date:"dd/MM/yy-HH:mm:ss":'-0300'}}hs, V: {{medicion.valor|PresionPipe}}</h4> -->
+      <h4>{{medicion.fecha|date:"dd/MM/yy-HH:mm:ss":'+0000'}}hs, V:{{medicion.valor|PresionPipe}}</h4>
     </ion-label>
 </ion-item>
 </ion-content>

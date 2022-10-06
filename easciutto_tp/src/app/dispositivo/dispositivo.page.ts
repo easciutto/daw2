@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit} from '@angular/core';
@@ -7,8 +8,6 @@ import { ListadoService } from '../services/listado.service';
 import { Medicion } from '../model/medicion';
 import { MedicionService } from '../services/medicion.service';
 import { AlertController } from '@ionic/angular';
-//import { KpapipePipe } from '../pipes/kpapipe.pipe';
-
 import * as Highcharts from 'highcharts';
 import * as moment from 'moment';
 
@@ -28,55 +27,41 @@ export class DispositivoPage implements OnInit {
   private chartOptions;
   public dispositivo: Dispositivo;
   public medicion: Medicion;
-  public showOpenButton: boolean;
+  public iniciarRiegoMask: boolean;
   public idElectrovalvula: number;
   public idDispositivo: string;
-  public requiereRiego: boolean;
-  public existenMediciones: boolean;
+  public regar: boolean;
+  public medicionesHistoricas: boolean;
   public momentjs: any = moment;
 
   constructor(private router: ActivatedRoute, private lServ: ListadoService, private mServ: MedicionService, public alertController: AlertController) {
-    this.showOpenButton = true;
+    this.iniciarRiegoMask = true;
 
    }
 
   ngOnInit() {
     this.idDispositivo = this.router.snapshot.paramMap.get('id');
 
-
    // this.generarChart(this.medicion.valor);
   }
 
   async ionViewDidEnter() {
     this.generarChart(10,'indefinido');
-    this.loadDispositivo();
+    this.cargarDispositivo();
   }
 
-  // async loadDispositivo() {
-  //   this.dispositivo = await this.lServ.getDispositivo1(Number.parseInt(this.idDispositivo, 10));
-  //   this.medicion = await this.lServ.getUltimaMedicion(Number.parseInt(this.idDispositivo, 10));
-  //   this.idElectrovalvula = this.dispositivo.electrovalvulaId;
-  //   if(this.medicion == null) {
-  //     this.existenMediciones = false;
-  //     console.log('No existen mediciones');
-  //   } else {
-  //     this.existenMediciones = true;
-  //     this.updateChart(Number.parseInt(this.medicion.valor.toString(), 10));
-  //   }
-  // }
-
-  async loadDispositivo() {
+  async cargarDispositivo() {
     try{
       const idDispositivoInt= parseInt(this.idDispositivo, 10);
-      const valorExito: any = await this.lServ.getDispositivo1(idDispositivoInt);
+      const valorExito = await this.lServ.getDispositivo1(idDispositivoInt);
       this.dispositivo = valorExito;
       this.medicion = await this.lServ.getUltimaMedicion(idDispositivoInt);
       this.idElectrovalvula = this.dispositivo.electrovalvulaId;
       if(this.medicion == null) {
-        this.existenMediciones = false;
-        console.log('No existen mediciones');
+        this.medicionesHistoricas = false;
+        console.log('No hay mediciones historicas');
       } else {
-        this.existenMediciones = true;
+        this.medicionesHistoricas = true;
         this.updateChart(Number.parseInt(this.medicion.valor.toString(), 10));
       }
     }
@@ -85,28 +70,27 @@ export class DispositivoPage implements OnInit {
     };
   }
 
-  async openElectrovalvula() {
+  async abrirElectrovalvula() {
     await this.lServ.putEstadoElectrovalvula(true, this.dispositivo.electrovalvulaId);
-    this.showOpenButton = false;
+    this.iniciarRiegoMask = false;
   }
 
-  async closeElectrovalvula() {
+  async cerrarElectrovalvula() {
     await this.lServ.putEstadoElectrovalvula(false, this.dispositivo.electrovalvulaId);
     const nuevaMedicion = Math.floor(Math.random()* this.medicion.valor);
-    const fechaActual = this.momentjs().format('YYYY-MM-DD hh:mm:ss');
+    const fechaActual = this.momentjs().format('YYYY-MM-DD HH:mm:ss');
     await this.mServ.postMedicion(new Medicion(0,fechaActual,nuevaMedicion,this.dispositivo.dispositivoId));
-    this.showOpenButton = true;
+    this.iniciarRiegoMask = true;
     this.updateChart(Number.parseInt(nuevaMedicion.toString(), 10));
   }
 
   async presentAlert(valor: number) {
 
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Alerta',
-      subHeader: 'Condicion del suelo',
-      //message: `El suelo tiene  ${new KpapipePipe().transform(valor)}, debe abrir electrovalvula` ,
-      message: `Debe abrir electrovalvula valor: ${valor} kPa` ,
+      //cssClass: 'my-custom-class',
+      header: 'Atención',
+      subHeader: `baja humedad: ${valor} kPa`,
+      message: `Se sugiere iniciar el riego`,
       buttons: ['OK']
     });
 
@@ -187,30 +171,30 @@ export class DispositivoPage implements OnInit {
     this.myChart = Highcharts.chart('highcharts', this.chartOptions );
   }
 
-  async handleButtonOpenClick() {
+  async handleBotonAbrir() {
     const alert = await this.alertController.create({
-      header: 'Abrir electrovalvula?',
-      message: 'Seguro desea abrir la electrovalvula?',
-      buttons: [{text:'Cancel', handler: () => close}, {text: 'Ok', handler: () =>this.openElectrovalvula()}],
+      header: 'Abrir electrovalvula',
+      message: 'Confirma?',
+      buttons: [{text:'Cancel', handler: () => close}, {text: 'Ok', handler: () =>this.abrirElectrovalvula()}],
     });
 
     await alert.present();
   }
 
-  async handleButtonCloseClick() {
+  async handleBotonCerrar() {
     const alert = await this.alertController.create({
-      header: 'Cerrar electrovalvula?',
-      message: 'Seguro desea cerrar la electrovalvula?',
-      buttons: [{text:'Cancel', handler: () => close}, {text: 'Ok', handler: () =>this.closeElectrovalvula()}],
+      header: 'Cerrar electrovalvula',
+      message: 'Confirma?',
+      buttons: [{text:'Cancel', handler: () => close}, {text: 'Ok', handler: () =>this.cerrarElectrovalvula()}],
     });
 
     await alert.present();
   }
 
-  async callGenerarMedicion() {
+  async solicitoMedicion() {
     const alert = await this.alertController.create({
-      header: 'Medir suelo',
-      message: 'Seguro desea generar una nueva medicion?',
+      header: 'Medir humedad',
+      message: 'Confirma?',
       buttons: [{text:'Cancel', handler: () => close}, {text: 'Ok', handler: () =>this.generarNuevaMedicion()}],
     });
 
@@ -219,11 +203,10 @@ export class DispositivoPage implements OnInit {
   }
 
   async generarNuevaMedicion() {
-    const nuevaMedicion = Math.floor(Math.random()* 100);
-    const fechaActual = this.momentjs().format('YYYY-MM-DD hh:mm:ss');
-    //console.log(fechaActual);
-    await this.mServ.postMedicion(new Medicion(0,fechaActual, nuevaMedicion,this.dispositivo.dispositivoId));
-    this.existenMediciones = true;
+    let nuevaMedicion = Math.floor(Math.random()* 100);
+    let fechaAct = this.momentjs().format('YYYY-MM-DD HH:mm:ss');
+    await this.mServ.postMedicion(new Medicion(0,fechaAct,nuevaMedicion,this.dispositivo.dispositivoId));
+    this.medicionesHistoricas = true;
     this.updateChart(Number.parseInt(nuevaMedicion.toString(), 10));
 
   }
@@ -231,10 +214,10 @@ export class DispositivoPage implements OnInit {
   updateChart(newValue: number) {
     if(newValue>= 30 && newValue <= 100) {
       this.presentAlert(newValue);
-      this.requiereRiego = true;
+      this.regar = true;
 
     } else {
-      this.requiereRiego = false;
+      this.regar = false;
     }
     this.myChart.update({
       title:{text:this.dispositivo.nombre},

@@ -30,6 +30,7 @@ export class MedicionesPage implements OnInit {
   async solicitoMediciones(idDispositivo: number) {
     const listaMed= await this.medicionS.getMedicionesDispositivoId(idDispositivo);
     this.listadoMediciones=listaMed;
+    console.log(listaMed);
   }
 
 

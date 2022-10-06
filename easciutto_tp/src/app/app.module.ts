@@ -7,7 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-//import { UnidadPresionPipePipe } from './pipes/unidad-presion-pipe.pipe';
+//import { EstadoElectrovalvulaPipe } from './pipes/estado-electrovalvula.pipe';
 
 @NgModule({
   declarations: [AppComponent],

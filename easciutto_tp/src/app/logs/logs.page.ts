@@ -12,16 +12,18 @@ import { LogsService } from '../services/log.service';
 export class LogsPage implements OnInit {
 
   listadoLogs: Log[];
+  public idDispositivo: string;
+
   constructor(private router: ActivatedRoute, public logS: LogsService) { }
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
-    console.log('entro a logs');
-    const idDispositivo= this.router.snapshot.paramMap.get('id');
-    const idDispositivoInt= parseInt(idDispositivo, 10);
-    console.log(`idDispositivo:${idDispositivo}`);
+    //console.log('entro a logs');
+    this.idDispositivo= this.router.snapshot.paramMap.get('id');
+    const idDispositivoInt= parseInt(this.idDispositivo, 10);
+    //console.log(`idDispositivo:${this.idDispositivo}`);
     this.solicitoLogs(idDispositivoInt);
 
   }

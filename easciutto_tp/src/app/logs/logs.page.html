@@ -1,9 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
      <ion-buttons slot="start">
-      <ion-back-button ></ion-back-button>
+      <ion-button routerLink="/dispositivo/{{idDispositivo}}">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title>logs</ion-title>
+    <ion-title>Logs electrovalvula {{idDispositivo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,11 +13,11 @@
   <ion-list>
     <ion-item *ngFor="let log of this.listadoLogs" >
         <ion-avatar slot="start">
-            <ion-icon size="large" name="thermometer"></ion-icon>
+            <ion-icon size="large" name="time-outline"></ion-icon>
         </ion-avatar>
         <ion-label>
             <!-- <h2>Sensor {{log.fecha|date:"MM/dd/yyyy h:mm:ss a"}} - {{log.apertura|electrovalvulaStatus}}</h2> -->
-            <h2>Sensor {{log.fecha|date:"MM/dd/yyyy h:mm:ss a"}} - {{log.apertura}}</h2>
+            <h4>{{log.fecha|date:"dd/MM/yy-HH:mm:ss":'-0300'}}hs - {{log.apertura|estadoEV}}</h4>
         </ion-label>
     </ion-item>
      <!-- fab placed to the top end -->

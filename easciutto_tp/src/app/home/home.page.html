@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="secondary" >
     <ion-title>Listado de dispositivos</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,15 +13,14 @@
   <ion-list>
       <ion-item *ngFor="let dispositivo of arrayDispositivos" routerLink="/dispositivo/{{dispositivo.dispositivoId}}" routerDirection="root">
           <ion-avatar slot="start">
-              <ion-icon size="large" name="thermometer"></ion-icon>
+              <ion-icon size="large" name="water-outline"></ion-icon>
           </ion-avatar>
-          <ion-label>
-              <h2 appDirectivaAttr>Disp {{dispositivo.dispositivoId}} - Sensor de humedad</h2>
+          <ion-label appDirectivaAttr>
+              <h2>Disp {{dispositivo.dispositivoId}} - Sensor de humedad</h2>
               <h3>
                   <ion-icon name="pin"></ion-icon> {{dispositivo.ubicacion}} - EV {{dispositivo.electrovalvulaId}}</h3>
           </ion-label>
       </ion-item>
   </ion-list>
 </ion-content>
-<ion-button expand="block">Block</ion-button>
 
