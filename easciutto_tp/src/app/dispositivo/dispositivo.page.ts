@@ -10,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 //import { KpapipePipe } from '../pipes/kpapipe.pipe';
 
 import * as Highcharts from 'highcharts';
-//import * as moment from 'moment';
+import * as moment from 'moment';
 
 // eslint-disable-next-line no-var
 declare var require: any;
@@ -33,6 +33,7 @@ export class DispositivoPage implements OnInit {
   public idDispositivo: string;
   public requiereRiego: boolean;
   public existenMediciones: boolean;
+  public momentjs: any = moment;
 
   constructor(private router: ActivatedRoute, private lServ: ListadoService, private mServ: MedicionService, public alertController: AlertController) {
     this.showOpenButton = true;
@@ -42,6 +43,7 @@ export class DispositivoPage implements OnInit {
   ngOnInit() {
     this.idDispositivo = this.router.snapshot.paramMap.get('id');
 
+
    // this.generarChart(this.medicion.valor);
   }
 
@@ -50,17 +52,37 @@ export class DispositivoPage implements OnInit {
     this.loadDispositivo();
   }
 
+  // async loadDispositivo() {
+  //   this.dispositivo = await this.lServ.getDispositivo1(Number.parseInt(this.idDispositivo, 10));
+  //   this.medicion = await this.lServ.getUltimaMedicion(Number.parseInt(this.idDispositivo, 10));
+  //   this.idElectrovalvula = this.dispositivo.electrovalvulaId;
+  //   if(this.medicion == null) {
+  //     this.existenMediciones = false;
+  //     console.log('No existen mediciones');
+  //   } else {
+  //     this.existenMediciones = true;
+  //     this.updateChart(Number.parseInt(this.medicion.valor.toString(), 10));
+  //   }
+  // }
+
   async loadDispositivo() {
-    this.dispositivo = await this.lServ.getDispositivo1(Number.parseInt(this.idDispositivo, 10));
-    this.medicion = await this.lServ.getUltimaMedicion(Number.parseInt(this.idDispositivo, 10));
-    this.idElectrovalvula = this.dispositivo.electrovalvulaId;
-    if(this.medicion == null) {
-      this.existenMediciones = false;
-      console.log('No existen mediciones');
-    } else {
-      this.existenMediciones = true;
-      this.updateChart(Number.parseInt(this.medicion.valor.toString(), 10));
+    try{
+      const idDispositivoInt= parseInt(this.idDispositivo, 10);
+      const valorExito: any = await this.lServ.getDispositivo1(idDispositivoInt);
+      this.dispositivo = valorExito;
+      this.medicion = await this.lServ.getUltimaMedicion(idDispositivoInt);
+      this.idElectrovalvula = this.dispositivo.electrovalvulaId;
+      if(this.medicion == null) {
+        this.existenMediciones = false;
+        console.log('No existen mediciones');
+      } else {
+        this.existenMediciones = true;
+        this.updateChart(Number.parseInt(this.medicion.valor.toString(), 10));
+      }
     }
+    catch (error){
+      console.log('Error al buscar el dispositivo');
+    };
   }
 
   async openElectrovalvula() {
@@ -71,8 +93,8 @@ export class DispositivoPage implements OnInit {
   async closeElectrovalvula() {
     await this.lServ.putEstadoElectrovalvula(false, this.dispositivo.electrovalvulaId);
     const nuevaMedicion = Math.floor(Math.random()* this.medicion.valor);
-    //await this.mServ.postMedicion(new Medicion(0,moment().format('YYYY-MM-DD hh:mm:ss'),nuevaMedicion,this.dispositivo.dispositivoId));
-    await this.mServ.postMedicion(new Medicion(0, new Date(),nuevaMedicion,this.dispositivo.dispositivoId));
+    const fechaActual = this.momentjs().format('YYYY-MM-DD hh:mm:ss');
+    await this.mServ.postMedicion(new Medicion(0,fechaActual,nuevaMedicion,this.dispositivo.dispositivoId));
     this.showOpenButton = true;
     this.updateChart(Number.parseInt(nuevaMedicion.toString(), 10));
   }
@@ -198,8 +220,9 @@ export class DispositivoPage implements OnInit {
 
   async generarNuevaMedicion() {
     const nuevaMedicion = Math.floor(Math.random()* 100);
-    //await this.mServ.postMedicion(new Medicion(0,moment().format('YYYY-MM-DD hh:mm:ss'),nuevaMedicion,this.dispositivo.dispositivoId));
-    await this.mServ.postMedicion(new Medicion(0,new Date(),nuevaMedicion,this.dispositivo.dispositivoId));
+    const fechaActual = this.momentjs().format('YYYY-MM-DD hh:mm:ss');
+    //console.log(fechaActual);
+    await this.mServ.postMedicion(new Medicion(0,fechaActual, nuevaMedicion,this.dispositivo.dispositivoId));
     this.existenMediciones = true;
     this.updateChart(Number.parseInt(nuevaMedicion.toString(), 10));
 

@@ -28,9 +28,12 @@ routerMedicion.get('/:idDispositivo/todas', function(req, res) {
 routerMedicion.post('/agregar', function(req, res) {
     pool.query('Insert into Mediciones (fecha,valor,dispositivoId) values (?,?,?)', [req.body.fecha, req.body.valor, req.body.dispositivoId], function(err, result, fields) {
         if (err) {
+            console.log("error",err);
             res.send(err).status(400);
             return;
         }
+        console.log(result);
+        console.log("ok POST");
         res.send(result);
     });
 });

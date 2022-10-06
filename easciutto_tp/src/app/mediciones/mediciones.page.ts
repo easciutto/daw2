@@ -13,6 +13,7 @@ import { MedicionService } from '../services/medicion.service';
 export class MedicionesPage implements OnInit {
 
   listadoMediciones: Medicion[];
+  public idDispositivo: string;
 
   constructor(private router: ActivatedRoute, private medicionS: MedicionService) { }
 
@@ -20,9 +21,8 @@ export class MedicionesPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    const idDispositivo= this.router.snapshot.paramMap.get('id');
-    const idDispositivoInt= parseInt(idDispositivo, 10);
-    console.log(`idDispositivo:${idDispositivo}`);
+    this.idDispositivo= this.router.snapshot.paramMap.get('id');
+    const idDispositivoInt= parseInt(this.idDispositivo, 10);
     this.solicitoMediciones(idDispositivoInt);
 
   }

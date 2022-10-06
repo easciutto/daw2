@@ -20,7 +20,7 @@ routerDispositivo.get('/:idDisp', function(req, res) {
             res.send(err).status(400);
             return;
         }
-        res.send(result[0]);
+        res.send(result);
     });
 });
 

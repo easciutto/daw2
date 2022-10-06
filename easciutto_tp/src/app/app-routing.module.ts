@@ -12,19 +12,15 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'dispositivo',
-    loadChildren: () => import('./dispositivo/dispositivo.module').then( m => m.DispositivoPageModule)
-  },
-  {
     path: 'dispositivo/:id',
     loadChildren: () => import('./dispositivo/dispositivo.module').then( m => m.DispositivoPageModule)
   },
   {
-    path: 'mediciones',
+    path: 'dispositivo/:id/mediciones',
     loadChildren: () => import('./mediciones/mediciones.module').then( m => m.MedicionesPageModule)
   },
   {
-    path: 'logs',
+    path: 'dispositivo/:id/logs',
     loadChildren: () => import('./logs/logs.module').then( m => m.LogsPageModule)
   },
 ];
