@@ -2,7 +2,7 @@ var express = require('express');
 var routerMedicion = express.Router();
 var pool = require('../../mysql');
 
-//Espera recibir por parámetro un id de dispositivo y devuelve su última medición
+//Espera recibir por parámetro un id de dispositivo y devuelve su última medición [No implementado en el frontend]
 routerMedicion.get('/:idDispositivo', function(req, res) {
     pool.query('Select * from Mediciones where dispositivoId=? order by fecha desc', [req.params.idDispositivo], function(err, result, fields) {
         if (err) {
@@ -13,7 +13,7 @@ routerMedicion.get('/:idDispositivo', function(req, res) {
     });
 });
 
-//Espera recibir por parámetro un id de dispositivo y devuelve todas sus mediciones
+//Espera recibir por parámetro un id de dispositivo y devuelve todas sus mediciones [No implementado en el frontend]
 routerMedicion.get('/:idDispositivo/todas', function(req, res) {
     pool.query('Select * from Mediciones where dispositivoId=? order by fecha desc', [req.params.idDispositivo], function(err, result, fields) {
         if (err) {

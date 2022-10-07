@@ -28,20 +28,5 @@ export class HomePage {
       console.log('Error al buscar dispositivos');
     };
   }
-  // miMetodo(parametro1: string){
-  //   console.log('clik en el boton', parametro1);
-  //   console.log(this.nroTarjeta);
-  // }
-  // cambiarValor(){
-  //   this.estaDeshabilitado=!this.estaDeshabilitado;
-  // }
-
-  // devolverTrue(){
-  //   return true;
-  // }
-
-  // manejadorHijo(valor: any){
-  //   console.log(valor);
-  // }
 
 }

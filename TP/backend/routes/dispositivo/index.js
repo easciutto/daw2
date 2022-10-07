@@ -48,7 +48,7 @@ routerDispositivo.get('/:id/medicionActual', function(req, res) {
         });
 });
 
-//Borro un dispositivo con id recibido por parámetro
+//Borro un dispositivo con id recibido por parámetro [No implementado en el frontend]
 routerDispositivo.delete("/:id", function(req,res) {
     console.log("Se recibe solicitud para BORRAR un dispositivo");
     let borrarDisp = 'Delete from Dispositivos where dispositivoId=?'; 

@@ -70,6 +70,26 @@ export class DispositivoPage implements OnInit {
     };
   }
 
+  async solicitoMedicion() {
+    const alert = await this.alertController.create({
+      header: 'Medir humedad',
+      message: 'Confirma?',
+      buttons: [{text:'Cancel', handler: () => close}, {text: 'Ok', handler: () =>this.generarNuevaMedicion()}],
+    });
+
+    await alert.present();
+
+  }
+
+  async generarNuevaMedicion() {
+    let nuevaMedicion = Math.floor(Math.random()* 100);
+    let fechaAct = this.momentjs().format('YYYY-MM-DD HH:mm:ss');
+    await this.mServ.postMedicion(new Medicion(0,fechaAct,nuevaMedicion,this.dispositivo.dispositivoId));
+    this.medicionesHistoricas = true;
+    this.updateChart(Number.parseInt(nuevaMedicion.toString(), 10));
+
+  }
+
   async abrirElectrovalvula() {
     await this.lServ.putEstadoElectrovalvula(true, this.dispositivo.electrovalvulaId);
     this.iniciarRiegoMask = false;
@@ -83,23 +103,6 @@ export class DispositivoPage implements OnInit {
     this.iniciarRiegoMask = true;
     this.updateChart(Number.parseInt(nuevaMedicion.toString(), 10));
   }
-
-  async presentAlert(valor: number) {
-
-    const alert = await this.alertController.create({
-      //cssClass: 'my-custom-class',
-      header: 'Atención',
-      subHeader: `baja humedad: ${valor} kPa`,
-      message: `Se sugiere iniciar el riego`,
-      buttons: ['OK']
-    });
-
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
-  }
-
 
   generarChart(valorObtenido: number, nombre: string) {
     this.chartOptions={
@@ -171,6 +174,25 @@ export class DispositivoPage implements OnInit {
     this.myChart = Highcharts.chart('highcharts', this.chartOptions );
   }
 
+  updateChart(newValue: number) {
+    if(newValue>= 30 && newValue <= 100) {
+      this.presentAlert(newValue);
+      this.regar = true;
+
+    } else {
+      this.regar = false;
+    }
+    this.myChart.update({
+      title:{text:this.dispositivo.nombre},
+      series: [{
+      name: 'kPA',
+      data: [newValue],
+      tooltip: {
+          valueSuffix: ' kPA'
+      }
+      }]});
+  }
+
   async handleBotonAbrir() {
     const alert = await this.alertController.create({
       header: 'Abrir electrovalvula',
@@ -191,42 +213,19 @@ export class DispositivoPage implements OnInit {
     await alert.present();
   }
 
-  async solicitoMedicion() {
+  async presentAlert(valor: number) {
+
     const alert = await this.alertController.create({
-      header: 'Medir humedad',
-      message: 'Confirma?',
-      buttons: [{text:'Cancel', handler: () => close}, {text: 'Ok', handler: () =>this.generarNuevaMedicion()}],
+      //cssClass: 'my-custom-class',
+      header: 'Atención',
+      subHeader: `baja humedad: ${valor} kPa`,
+      message: `Se sugiere iniciar el riego`,
+      buttons: ['OK']
     });
 
     await alert.present();
 
-  }
-
-  async generarNuevaMedicion() {
-    let nuevaMedicion = Math.floor(Math.random()* 100);
-    let fechaAct = this.momentjs().format('YYYY-MM-DD HH:mm:ss');
-    await this.mServ.postMedicion(new Medicion(0,fechaAct,nuevaMedicion,this.dispositivo.dispositivoId));
-    this.medicionesHistoricas = true;
-    this.updateChart(Number.parseInt(nuevaMedicion.toString(), 10));
-
-  }
-
-  updateChart(newValue: number) {
-    if(newValue>= 30 && newValue <= 100) {
-      this.presentAlert(newValue);
-      this.regar = true;
-
-    } else {
-      this.regar = false;
-    }
-    this.myChart.update({
-      title:{text:this.dispositivo.nombre},
-      series: [{
-      name: 'kPA',
-      data: [newValue],
-      tooltip: {
-          valueSuffix: ' kPA'
-      }
-      }]});
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
   }
 }
