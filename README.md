@@ -2,13 +2,13 @@
 DESARROLLO DE APLICACIONES MULTIPLATAFORMA - Resolucion del TP
 =======================
 
-La consigna del trabajo práctico se detalla en el archivo: ./Trabajo Práctico Desarrollo de Aplicaciones Multiplataforma.pdf
+La consigna del trabajo práctico se detalla en el archivo: /TP/Trabajo Práctico Desarrollo de Aplicaciones Multiplataforma.pdf
 
 La concreción implica: desarrollar una aplicación híbrida en `ionic` como frontend; desarrollar una API en `NodeJs` Express, como servidor backend y una base de datos `MySQL`, para consultar y modificar los datos.
 
-El frontend lo implemento de manera local. Tanto el backend como la base de datos los implemento sobre un ecosistema `Docker`.
+El frontend se implementa de forma local. Tanto el backend como la base de datos se implementa sobre un ecosistema `Docker`.
 
-Reutilicé el ecosistema `Docker` desarrollado en la materia previa, DAW. La documentación detallada de como implementarlo se encuentra en: https://github.com/easciutto/app-fullstack-base-2022-i06 . La única salvedad, es que en el archivo `docker-compose.yml` no se incluye el compilador de `TypeScript`, ya que no es necesario para éste proyecto.
+Se reutilizó el ecosistema `Docker` desarrollado en la materia previa, DAW. La documentación detallada de como implementarlo se encuentra en: https://github.com/easciutto/app-fullstack-base-2022-i06 . El único cambio relevante, es que en el archivo `docker-compose.yml` no se incluye el compilador de `TypeScript`, ya que no es necesario para éste proyecto.
 
 ## Comenzando 🚀
 
@@ -19,10 +19,14 @@ Guía con los pasos escenciales para poner en marcha la aplicación.
 ### Instalar las dependencias
 
 Para correr este proyecto es necesario instalar:
-    1-  `Docker` y `Docker Compose`. Referencias en [este artículo](https://www.gotoiot.com/pages/articles/docker_installation_linux/) o en la documentación        oficial de [Docker](https://docs.docker.com/get-docker/) y también la de [Docker Compose](https://docs.docker.com/compose/install/).
-    2- npm: sudo npm install -g npm@8.18.0
-    3- angular cli:sudo npm install -g @angular/cli@13.0.0
-    4- ionic cli: sudo npm i -g @ionic/cli
+
+`Docker` y `Docker Compose`. Referencias en [este artículo](https://www.gotoiot.com/pages/articles/docker_installation_linux/) o en la documentación oficial de[Docker](https://docs.docker.com/get-docker/) y también la de [Docker Compose](https://docs.docker.com/compose/install/).
+
+Instalar npm: sudo npm install -g npm@8.18.0
+
+Instalar angular cli:sudo npm install -g @angular/cli@13.0.0
+
+Instalar ionic cli: sudo npm i -g @ionic/cli
 
 
 ### Descargar el código
@@ -77,50 +81,8 @@ La base de datos se crea con permisos de superusuario por lo que no se puede bor
 
 El frontend se comunica con el servidor backend mediante request HTTP.
 La aplicación de Ionic, se compone de los siguientes directorios y archivos:
-.
-├── app.component.html
-├── app.component.scss
-├── app.component.ts
-├── app.module.ts
-├── app-routing.module.ts
-├── directives                              # Directiva de atributo
-│   └── nombre-directiva.directive.ts
-├── dispositivo                                 # Page de un dispositivo
-│   ├── dispositivo.module.ts
-│   ├── dispositivo.page.html
-│   ├── dispositivo.page.scss
-│   ├── dispositivo.page.ts
-│   └── dispositivo-routing.module.ts
-├── home                                    # Page principal de inicio de la app
-│   ├── home.module.ts
-│   ├── home.page.html
-│   ├── home.page.scss
-│   ├── home.page.ts
-│   └── home-routing.module.ts
-├── logs                                    # Page de los logs de riego de cada dispositivo
-│   ├── logs.module.ts
-│   ├── logs.page.html
-│   ├── logs.page.scss
-│   ├── logs.page.ts
-│   └── logs-routing.module.ts
-├── mediciones                                  # Page de las mediciones de cada dispositivo
-│   ├── mediciones.module.ts
-│   ├── mediciones.page.html
-│   ├── mediciones.page.scss
-│   ├── mediciones.page.ts
-│   └── mediciones-routing.module.ts
-├── model                                   # Implemetacion de getters y setters de dispositivos, logs y mediciones
-│   ├── dispositivo.ts
-│   ├── log.ts
-│   └── medicion.ts
-├── pipes                                   # Pipes custom para modificar vistas                             
-│   ├── estado-electrovalvula.pipe.ts
-│   ├── nombre-pipe.pipe.ts
-│   └── unidad-presion-pipe.pipe.ts
-└── services                                    # Servicios para la comunicacion con la API del backend
-    ├── listado.service.ts
-    ├── log.service.ts
-    └── medicion.service.ts
+
+![architecture](./arbol.PNG)
 
 
 ### API del backend
